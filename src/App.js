@@ -8,10 +8,12 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // TODO -- add state for zip / search and add event listeners to the inputs
+  //const [zip, setZip] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBusinesses();
+      console.log(data);
       setBusinesses(data);
       setLoading(false);
     };
