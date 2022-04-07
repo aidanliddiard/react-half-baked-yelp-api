@@ -8,6 +8,8 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // TODO -- add state for zip / search and add event listeners to the inputs
+  const [zip, setZip] = useState('');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +21,10 @@ function App() {
   }, []);
 
   // TODO -- add event for button click to handle calling fetchBusinesses with zip / search
+  const searchHandler = async () => {
+    const data = await fetchBusinesses(zip, search);
+    setBusinesses(data);
+  };
 
   return (
     <div className="App">
@@ -26,18 +32,30 @@ function App() {
       <div className="query-form">
         <div className="form-control">
           <label>Zip:</label>
-          <input type="text" placeholder="zip" />
+          <input
+            type="text"
+            id="zipCode"
+            placeholder="zip"
+            onChange={(e) => setZip(e.target.value)}
+          />
         </div>
         <div className="form-control">
           <label>Query:</label>
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            id="searching"
+            placeholder="Search..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
-        <button>Search</button>
+        <button onClick={searchHandler}>Search</button>
       </div>
       {loading && <div className="loader"></div>}
       {!loading && businesses.map((b) => <RestaurantListItem key={b.id} {...b} />)}
     </div>
   );
 }
+
+//adding a comment
 
 export default App;
