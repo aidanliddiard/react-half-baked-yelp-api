@@ -15,7 +15,6 @@ function App() {
     const fetchData = async () => {
       const data = await fetchBusinesses();
       setBusinesses(data);
-      console.log(data);
       setLoading(false);
     };
     fetchData();
